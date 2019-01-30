@@ -74,6 +74,18 @@ services:
     depends_on:
       - elasticsearch              
 
+  apachebeat:
+    build:
+      context: apachebeat/
+    volumes:
+      - ./filebeat/config/filebeat.yml:/etc/filebeat/filebeat.yml:ro      
+      - ./filebeat/config/modules.d:/etc/filebeat/modules.d:ro            
+    networks:
+      - elk
+    tty: true
+    depends_on:
+      - elasticsearch              
+
 networks:
 
   elk:
