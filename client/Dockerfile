@@ -1,9 +1,0 @@
-ARG  ELK_VERSION
-FROM bkuhlen73/ubuntu:${ELK_VERSION}
-
-ENV TERM=xterm
-# Add your elasticsearch plugins setup here
-# Example: RUN elasticsearch-plugin install analysis-icu
-
-RUN ["/usr/bin/metricbeat", "-e"]
-

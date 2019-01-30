@@ -52,14 +52,13 @@ services:
     depends_on:
       - elasticsearch
       
-  client2:
+  metricbeat:
     build:
-      context: client2/
-      args:
-        ELK_VERSION: 0.4
+      context: metricbeat/
+#      args:
+#        ELK_VERSION: 0.4
     volumes:
       - ./client/config/metricbeat.yml:/etc/metricbeat/metricbeat.yml:ro      
-      - ./client/config/filebeat.yml:/etc/filebeat/filebeat.yml:ro            
     networks:
       - elk
     tty: true

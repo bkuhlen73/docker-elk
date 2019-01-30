@@ -52,19 +52,27 @@ services:
     depends_on:
       - elasticsearch
       
-  client:
+  metricbeat:
     build:
-      context: client/
-      args:
-        ELK_VERSION: 0.4
+      context: metricbeat/
     volumes:
-      - ./client/config/metricbeat.yml:/etc/metricbeat/metricbeat.yml:ro      
-      - ./client/config/filebeat.yml:/etc/filebeat/filebeat.yml:ro            
+      - ./metricbeat/config/metricbeat.yml:/etc/metricbeat/metricbeat.yml:ro      
     networks:
       - elk
     tty: true
     depends_on:
       - elasticsearch        
+      
+  filebeat:
+    build:
+      context: filebeat/
+    volumes:
+      - ./filebeat/config/filebeat.yml:/etc/filebeat/filebeat.yml:ro      
+    networks:
+      - elk
+    tty: true
+    depends_on:
+      - elasticsearch              
 
 networks:
 
