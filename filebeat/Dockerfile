@@ -15,3 +15,4 @@ RUN apt-get install -y curl
 RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.6.0-amd64.deb
 RUN dpkg -i filebeat-6.6.0-amd64.deb
 CMD ["/usr/bin/filebeat", "-e"]
+

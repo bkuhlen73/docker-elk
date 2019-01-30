@@ -12,7 +12,12 @@ RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN apt-get install -y joe
 RUN apt-get install -y curl
-RUN curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-6.6.0-amd64.deb
-RUN dpkg -i metricbeat-6.6.0-amd64.deb
-CMD ["/usr/bin/metricbeat", "-e"]
+# Install and run apache
+RUN apt-get install -y apache2 && apt-get clean
+RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.6.0-amd64.deb
+RUN dpkg -i filebeat-6.6.0-amd64.deb
+CMD ["/usr/bin/filebeat", "-e"]
+
+EXPOSE 80
+CMD service apache2 start
 
